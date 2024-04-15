@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+:root {
+  --transition: all 0.3s ease;
+  --quiz-border: 1px solid #1e293b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+html,
+body {
+  height: 100vh;
+  background-color: #f2f4f3;
+  overflow: hidden;
+}
+
+main {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+#startQuiz {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  border: none;
+  background-image: linear-gradient(to right, #14b8a6, #115e59);
+  color: white;
+  width: 200px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+#startQuiz:hover {
+  opacity: 0.9;
+  transform: scale(1.01);
+}
+
+#startQuiz:active {
+  transform: scale(0.98);
+}
+
+.quiz-container {
+  max-width: 600px;
+  width: 100%;
+  border: var(--quiz-border);
+  border-radius: 5px;
+  box-shadow: #1e293b 0px 0px 5px;
+}
+
+.quiz-container .question-text {
+  padding: 20px;
+  background-color: #115e59;
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quiz-container .options {
+  list-style: none;
+  padding: 15px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-container .options button {
+  padding: 10px;
+  border: var(--quiz-border);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 1.3rem;
+  font-weight: bolder;
+  color: #1e293b;
+  text-align: left;
+}
+
+.quiz-container .options button:hover {
+  background-color: #d1d5db;
+}
+
+.quiz-container .options button.correct {
+  background-color: #22c55e;
+  pointer-events: none;
+  color: white;
+}
+
+.quiz-container .options button.wrong {
+  background-color: #ef4444;
+  pointer-events: none;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+.disabled-button {
+  pointer-events: none;
+}
+
+.finishedQuiz-video {
+  max-width: 550px;
+  width: 100%;
+  height: 450px;
+}
