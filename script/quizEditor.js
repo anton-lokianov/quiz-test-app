@@ -72,8 +72,6 @@ const handleFormSubmit = async (event) => {
   event.preventDefault();
   const form = event.target;
   const level = form.id;
-  console.log("Form submitted:", level);
-
   const newQuestion = processFormData(form);
 
   // Send the new question to the server
