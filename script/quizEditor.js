@@ -78,6 +78,7 @@ const handleFormSubmit = async (event) => {
 
   // Send the new question to the server
 
+  localStorage.removeItem(level);
   form.reset();
 };
 
