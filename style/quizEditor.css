@@ -1,0 +1,71 @@
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion {
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.3s ease;
+  background-color: #115e59;
+  color: white;
+  max-width: 700px;
+  margin: 5px auto;
+  border-radius: 3px;
+}
+
+.active,
+.accordion:hover {
+  background-color: #14b8a6;
+}
+
+.accordion:after {
+  content: "\002B";
+  color: white;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  padding: 0 3rem;
+  background-color: white;
+  max-height: 0;
+  max-width: 700px;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  border-radius: 3px;
+}
+
+.form-group {
+  padding: 10px;
+}
+
+.form-group .checkbox {
+  position: relative;
+  top: 1px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  display: inline-block;
+  border: 1px solid #1e293b;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.button-group {
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1rem;
+}
