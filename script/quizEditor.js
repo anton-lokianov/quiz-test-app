@@ -63,8 +63,8 @@ function processFormData(form) {
 
   return {
     question: formData.get("question"),
-    options: options,
-    correctAnswer: correctAnswer,
+    options,
+    correctAnswer,
   };
 }
 
