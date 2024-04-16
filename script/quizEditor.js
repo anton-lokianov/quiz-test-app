@@ -72,6 +72,12 @@ const handleFormSubmit = async (event) => {
   event.preventDefault();
   const form = event.target;
   const level = form.id;
+  const validation = formValidation(form);
+
+  if (!validation) {
+    return;
+  }
+
   const newQuestion = processFormData(form);
 
   // Send the new question to the server
@@ -99,4 +105,34 @@ const fillFormWithData = (form, data) => {
     }
   });
   form.querySelector(`[value='${correctAnswer}']`).checked = true;
+};
+
+const formValidation = (form) => {
+  const question = form.querySelector("[name='question']").value;
+  const options = form.querySelectorAll("[name^='option']");
+  const correctAnswer = form.querySelector("[name='correctAnswer']:checked");
+
+  if (!question || question.trim() === "") {
+    alert("Question is required");
+    return false;
+  }
+
+  if (options.length < 4) {
+    alert("At least 4 options are required");
+    return false;
+  }
+
+  for (let i = 0; i < options.length; i++) {
+    if (!options[i].value || options[i].value.trim() === "") {
+      alert(`Option ${i + 1} is required`);
+      return false;
+    }
+  }
+
+  if (!correctAnswer) {
+    alert("Correct answer is required");
+    return false;
+  }
+
+  return true;
 };
