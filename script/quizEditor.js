@@ -47,59 +47,43 @@ function setupFormSubmissions() {
   });
 }
 
+function processFormData(form) {
+  const formData = new FormData(form);
+  const options = [];
+  let correctAnswer = "";
+
+  formData.forEach((value, key) => {
+    if (key.startsWith("option")) {
+      options.push(value);
+      if (formData.get("correctAnswer") === key) {
+        correctAnswer = value;
+      }
+    }
+  });
+
+  return {
+    question: formData.get("question"),
+    options: options,
+    correctAnswer: correctAnswer,
+  };
+}
+
 const handleFormSubmit = async (event) => {
   event.preventDefault();
   const form = event.target;
   const level = form.id;
   console.log("Form submitted:", level);
-  const formData = new FormData(form);
 
-  const options = [];
-  let correctAnswer = "";
+  const newQuestion = processFormData(form);
 
-  formData.forEach((value, key) => {
-    if (key.startsWith("option")) {
-      options.push(value);
-      if (formData.get("correctAnswer") === key) {
-        correctAnswer = value;
-      }
-    }
-  });
+  // Send the new question to the server
 
-  const newQuestion = {
-    question: formData.get("question"),
-    options: options,
-    answer: correctAnswer,
-  };
-
-  // Save the new question to the database
-
-  localStorage.removeItem(level);
   form.reset();
 };
 
 const saveFormData = (formId) => {
   const form = document.getElementById(formId);
-  const formData = new FormData(form);
-
-  const options = [];
-  let correctAnswer = "";
-
-  formData.forEach((value, key) => {
-    if (key.startsWith("option")) {
-      options.push(value);
-      if (formData.get("correctAnswer") === key) {
-        correctAnswer = value;
-      }
-    }
-  });
-
-  const newQuestion = {
-    question: formData.get("question"),
-    options: options,
-    correctAnswer: correctAnswer,
-  };
-
+  const newQuestion = processFormData(form);
   localStorage.setItem(formId, JSON.stringify(newQuestion));
 };
 
