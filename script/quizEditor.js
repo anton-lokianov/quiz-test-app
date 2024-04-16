@@ -47,8 +47,13 @@ function setupFormSubmissions() {
   });
 }
 
-function processFormData(form) {
+const handleFormSubmit = async (event) => {
+  event.preventDefault();
+  const form = event.target;
+  const level = form.id;
+  console.log("Form submitted:", level);
   const formData = new FormData(form);
+
   const options = [];
   let correctAnswer = "";
 
@@ -61,20 +66,11 @@ function processFormData(form) {
     }
   });
 
-  return {
+  const newQuestion = {
     question: formData.get("question"),
     options: options,
     answer: correctAnswer,
   };
-}
-
-const handleFormSubmit = async (event) => {
-  event.preventDefault();
-  const form = event.target;
-  const level = form.id;
-  console.log("Form submitted:", level);
-
-  const newQuestion = processFormData(form);
 
   // Save the new question to the database
 
@@ -82,9 +78,28 @@ const handleFormSubmit = async (event) => {
   form.reset();
 };
 
-const handleSaveFormData = (formId) => {
+const saveFormData = (formId) => {
   const form = document.getElementById(formId);
-  const newQuestion = processFormData(form);
+  const formData = new FormData(form);
+
+  const options = [];
+  let correctAnswer = "";
+
+  formData.forEach((value, key) => {
+    if (key.startsWith("option")) {
+      options.push(value);
+      if (formData.get("correctAnswer") === key) {
+        correctAnswer = value;
+      }
+    }
+  });
+
+  const newQuestion = {
+    question: formData.get("question"),
+    options: options,
+    correctAnswer: correctAnswer,
+  };
+
   localStorage.setItem(formId, JSON.stringify(newQuestion));
 };
 
