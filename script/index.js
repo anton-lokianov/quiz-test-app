@@ -1,4 +1,5 @@
 import { quizQuestions } from "./quiz.js";
+import { startFireworks } from "./fireworks.js";
 
 let currentLevel = 1;
 const mainContainer = document.querySelector("main");
@@ -65,6 +66,7 @@ const checkAnswerHandler = (selectedOption, currentQuestion) => {
           if (currentLevel > 3) {
             setTimeout(() => {
               finishedQuizVideo();
+              startFireworks();
             }, 700);
           } else {
             setTimeout(() => {
@@ -104,6 +106,7 @@ const finishedQuizVideo = () => {
     "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
   youtubeVideo.className = "finishedQuiz-video";
   youtubeVideo.frameborder = "0";
+  youtubeVideo.style.zIndex = "1000";
 
   quizContainer.classList.add("hidden");
   mainContainer.appendChild(youtubeVideo);
